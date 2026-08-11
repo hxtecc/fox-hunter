@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>银狐猎手 - 设置</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <!-- 顶部导航栏 -->
+  <header class="top-header">
+    <div class="header-left">
+      <img src="icons/icon48.png" alt="Logo" class="header-logo">
+      <h1 class="header-title">银狐猎手</h1>
+      <span class="header-version" id="headerVersion">v2.0.0</span>
+    </div>
+    <div class="header-right">
+      <button class="btn btn-ghost" id="btnExportLogs">导出日志</button>
+      <button class="btn btn-ghost" id="btnImportLogs">导入日志</button>
+      <button class="btn btn-ghost" id="btnClearLogs">清空日志</button>
+      <button class="btn btn-primary" id="btnSaveAll">保存全部设置</button>
+    </div>
+  </header>
+
+  <!-- 主内容区：侧边栏 + 内容 -->
+  <div class="main-container">
+    <!-- 侧边栏 -->
+    <nav class="sidebar">
+      <ul class="nav-list">
+        <li class="nav-item active" data-panel="general">
+          <span class="nav-icon">⚙️</span>
+          <span class="nav-text">通用设置</span>
+        </li>
+        <li class="nav-item" data-panel="whitelist">
+          <span class="nav-icon">📋</span>
+          <span class="nav-text">白名单管理</span>
+        </li>
+        <li class="nav-item" data-panel="appearance">
+          <span class="nav-icon">🎨</span>
+          <span class="nav-text">外观与阈值</span>
+        </li>
+        <li class="nav-item" data-panel="rules">
+          <span class="nav-icon">📏</span>
+          <span class="nav-text">检测规则</span>
+        </li>
+        <li class="nav-item" data-panel="dns">
+          <span class="nav-icon">🌐</span>
+          <span class="nav-text">DNS检测</span>
+        </li>
+        <li class="nav-item" data-panel="logs">
+          <span class="nav-icon">📊</span>
+          <span class="nav-text">日志</span>
+        </li>
+        <li class="nav-item" data-panel="about">
+          <span class="nav-icon">ℹ️</span>
+          <span class="nav-text">关于</span>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- 内容区 -->
+    <main class="content">
+      <!-- 通用设置 -->
+      <section class="panel active" id="panel-general">
+        <h2 class="panel-title">通用设置</h2>
+
+        <div class="card">
+          <h3 class="card-title">基础配置</h3>
+
+          <div class="form-group">
+            <label class="form-label">主题模式</label>
+            <select class="form-select" id="themeMode">
+              <option value="dark">深色模式</option>
+              <option value="light">浅色模式</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">扫描间隔（秒）</label>
+            <input type="number" class="form-input" id="scanInterval" min="0" max="60" value="3">
+            <span class="form-hint">设为 0 表示关闭自动扫描，仅手动刷新</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">全局静默时长（小时）</label>
+            <input type="number" class="form-input" id="silentDuration" min="0" max="24" value="1">
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 class="card-title">通知设置</h3>
+
+          <div class="form-group">
+            <label class="form-checkbox">
+              <input type="checkbox" id="enableNotifications" checked>
+              <span>启用桌面通知</span>
+            </label>
+          </div>
+
+          <div class="form-group">
+            <label class="form-checkbox">
+              <input type="checkbox" id="enableSound" checked>
+              <span>启用声音提醒</span>
+            </label>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">弹窗冷却时间（分钟）</label>
+            <input type="number" class="form-input" id="popupCooldown" min="0" max="1440" value="60">
+            <span class="form-hint">同一域名在此时间内不会重复弹窗</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 class="card-title">功能开关</h3>
+
+          <div class="form-group">
+            <label class="form-checkbox">
+              <input type="checkbox" id="ballEnabled" checked>
+              <span>启用小圆球悬浮显示</span>
+            </label>
+          </div>
+
+          <div class="form-group">
+            <label class="form-checkbox">
+              <input type="checkbox" id="popupEnabled" checked>
+              <span>启用风险弹窗提示</span>
+            </label>
+          </div>
+
+          <div class="form-group">
+            <label class="form-checkbox">
+              <input type="checkbox" id="downloadHookEnabled" checked>
+              <span>启用动态下载拦截</span>
+            </label>
+            <span class="form-hint">拦截 Blob / fetch / XHR 等方式的动态下载</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-checkbox">
+              <input type="checkbox" id="redirectEnabled" checked>
+              <span>启用跳转拦截</span>
+            </label>
+            <span class="form-hint">跨域跳转时显示安全警告页面</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-checkbox">
+              <input type="checkbox" id="sslEnabled" checked>
+              <span>启用 SSL 证书检测</span>
+            </label>
+            <span class="form-hint">检测网站 SSL 证书有效性</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 白名单管理 -->
+      <section class="panel" id="panel-whitelist">
+        <h2 class="panel-title">白名单管理</h2>
+
+        <div class="card">
+          <h3 class="card-title">白名单域名</h3>
+          <div class="form-group">
+            <label class="form-label">添加域名</label>
+            <div class="input-group">
+              <input type="text" class="form-input" id="whitelistInput" placeholder="输入域名，如 example.com">
+              <button class="btn btn-primary" id="btnAddWhitelist">添加</button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">当前白名单 (<span id="whitelistCount">0</span> 个)</label>
+            <div class="whitelist-container" id="whitelistContainer">
+              <!-- 动态填充 -->
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 class="card-title">忽略域名（不再提示）</h3>
+          <div class="form-group">
+            <label class="form-label">当前忽略列表 (<span id="ignoredCount">0</span> 个)</label>
+            <div class="whitelist-container" id="ignoredContainer">
+              <!-- 动态填充 -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 外观与阈值 -->
+      <section class="panel" id="panel-appearance">
+        <h2 class="panel-title">外观与阈值</h2>
+
+        <div class="card">
+          <h3 class="card-title">小圆球设置</h3>
+
+          <div class="form-group">
+            <label class="form-label">圆球大小（px）</label>
+            <input type="range" class="form-range" id="ballSize" min="40" max="80" value="56">
+            <span class="form-value" id="ballSizeValue">56px</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">圆球透明度</label>
+            <input type="range" class="form-range" id="ballOpacity" min="0.3" max="1" step="0.1" value="0.8">
+            <span class="form-value" id="ballOpacityValue">0.8</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">安全状态颜色</label>
+            <input type="color" class="form-color" id="safeColor" value="#10b981">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">警告状态颜色</label>
+            <input type="color" class="form-color" id="warningColor" value="#f59e0b">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">危险状态颜色</label>
+            <input type="color" class="form-color" id="dangerColor" value="#ef5350">
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 class="card-title">风险阈值</h3>
+
+          <div class="form-group">
+            <label class="form-label">安全阈值（低于此值为安全）</label>
+            <input type="number" class="form-input" id="safeThreshold" min="0" max="200" value="50">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">危险阈值（高于此值为危险）</label>
+            <input type="number" class="form-input" id="dangerThreshold" min="0" max="500" value="100">
+          </div>
+        </div>
+      </section>
+
+      <!-- 检测规则 -->
+      <section class="panel" id="panel-rules">
+        <h2 class="panel-title">检测规则</h2>
+
+        <div class="card">
+          <h3 class="card-title">规则权重配置</h3>
+          <p class="card-desc">调整各检测规则的权重分数，分数越高表示该规则触发时风险越大</p>
+
+          <div class="rules-container" id="rulesContainer">
+            <!-- 动态填充 -->
+          </div>
+        </div>
+      </section>
+
+      <!-- DNS检测 -->
+      <section class="panel" id="panel-dns">
+        <h2 class="panel-title">DNS检测</h2>
+
+        <div class="card">
+          <h3 class="card-title">当前 DNS 状态</h3>
+          <div class="form-group">
+            <label class="form-label">当前 DNS 服务器</label>
+            <span class="dns-provider-badge" id="currentDnsProvider">检测中...</span>
+            <button class="btn btn-ghost btn-sm" id="btnDetectDns">刷新检测</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 class="card-title">DNS劫持检测</h3>
+
+          <div class="form-group">
+            <label class="form-checkbox">
+              <input type="checkbox" id="enableDNSCheck" checked>
+              <span>启用DNS劫持检测</span>
+            </label>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">检测间隔（秒）</label>
+            <input type="number" class="form-input" id="dnsCheckInterval" min="10" max="300" value="30">
+          </div>
+
+          <div class="form-group">
+            <label class="form-checkbox">
+              <input type="checkbox" id="enableDNSAlert" checked>
+              <span>启用DNS劫持全屏警告</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 class="card-title">DNS测试</h3>
+          <div class="form-group">
+            <label class="form-label">DNS 服务器</label>
+            <select class="form-select" id="dnsServer">
+              <option value="auto">自动（默认）</option>
+              <option value="114">114DNS (114.114.114.114)</option>
+              <option value="alidns">阿里 DNS (223.5.5.5)</option>
+              <option value="google">Google DNS (8.8.8.8)</option>
+              <option value="cloudflare">Cloudflare DNS (1.1.1.1)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">测试域名</label>
+            <div class="input-group">
+              <input type="text" class="form-input" id="dnsTestDomain" placeholder="输入域名进行测试">
+              <button class="btn btn-primary" id="btnDNSTest">测试</button>
+            </div>
+          </div>
+          <div class="dns-result" id="dnsResult" style="display:none;">
+            <!-- 动态填充 -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 日志 -->
+      <section class="panel" id="panel-logs">
+        <h2 class="panel-title">检测日志</h2>
+
+        <div class="card">
+          <div class="log-header">
+            <h3 class="card-title">日志记录</h3>
+            <div class="log-actions">
+              <select class="form-select" id="logFilter">
+                <option value="all">全部</option>
+                <option value="info">信息</option>
+                <option value="warning">警告</option>
+                <option value="danger">危险</option>
+              </select>
+              <button class="btn btn-ghost" id="btnRefreshLogs">刷新</button>
+            </div>
+          </div>
+
+          <div class="log-container" id="logContainer">
+            <!-- 动态填充 -->
+          </div>
+
+          <div class="log-pagination" id="logPagination">
+            <!-- 动态填充 -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 关于 -->
+      <section class="panel" id="panel-about">
+        <h2 class="panel-title">关于</h2>
+
+        <div class="card">
+          <div class="about-info">
+            <img src="icons/icon128.png" alt="Logo" class="about-logo">
+            <div class="about-text">
+              <h3>银狐猎手</h3>
+              <p class="about-version">版本 <span id="aboutVersion">2.0.0</span></p>
+              <p class="about-desc">一款专注于识别仿冒下载站的浏览器安全扩展，通过多维度规则评分系统，实时检测页面风险。</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 class="card-title">功能特性</h3>
+          <ul class="feature-list">
+            <li>🔍 多维度规则评分系统</li>
+            <li>🌐 DNS劫持检测与预警</li>
+            <li>📋 智能白名单管理</li>
+            <li>🎨 可自定义外观与阈值</li>
+            <li>📊 详细检测日志</li>
+            <li>🔄 实时页面扫描</li>
+            <li>🏛️ 政府网站智能识别</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3 class="card-title">数据统计</h3>
+          <div class="stats-grid">
+            <div class="stat-item">
+              <span class="stat-value" id="statTotalScans">0</span>
+              <span class="stat-label">总扫描次数</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value" id="statWarnings">0</span>
+              <span class="stat-label">警告次数</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value" id="statBlocked">0</span>
+              <span class="stat-label">拦截次数</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value" id="statWhitelist">0</span>
+              <span class="stat-label">白名单域名</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- 保存成功提示 -->
+  <div class="toast" id="saveToast" style="display:none;">
+    <span class="toast-icon">✓</span>
+    <span class="toast-text">设置已保存</span>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>

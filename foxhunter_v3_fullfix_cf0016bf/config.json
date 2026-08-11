@@ -1,0 +1,194 @@
+{
+  "version": "0.6.0",
+  "name": "银狐猎手",
+  "name_en": "FoxHunter",
+  "subtitle": "智能威胁防御系统",
+  "description": "基于多层行为指纹识别与动态启发式分析引擎的新一代下载安全护盾",
+
+  "author": {
+    "name": "银狐猎手开发团队",
+    "lead": "hxtecc",
+    "github": "https://github.com/hxtecc/fox-hunter",
+    "email": "hxtecc@163.com",
+    "website": "https://hxtecc.github.io"
+  },
+
+  "contributors": [
+    { "name": "hxtecc", "role": "核心开发 & 架构设计" },
+    { "name": "AI Assistant", "role": "代码生成 & 优化建议" }
+  ],
+
+  "legal": {
+    "title": "法律声明 & 用户协议",
+    "version": "V1.0",
+    "effectiveDate": "2026-08-13",
+    "sections": [
+      {
+        "id": "disclaimer",
+        "title": "1. 免责声明",
+        "content": "本插件按「现状」（AS IS）免费提供，不保证 100% 的检测准确率。用户拥有下载的最终决定权，开发者对因使用本插件产生的任何直接或间接损失不承担任何赔偿责任。"
+      },
+      {
+        "id": "privacy",
+        "title": "2. 隐私承诺",
+        "content": "本插件绝不收集、上传或分享任何用户数据。所有检测均在本地浏览器完成，不依赖任何云端服务。"
+      },
+      {
+        "id": "license",
+        "title": "3. 开源与版权",
+        "content": "本插件基于 MIT 开源协议发布，部分检测能力借鉴自开源项目 VirusDetector。个人及非商业用途可自由使用、修改、分发。商业用途须获得开发者书面授权许可。"
+      },
+      {
+        "id": "userResponsibility",
+        "title": "4. 用户责任",
+        "content": "用户应遵守所在国家/地区的法律法规，不得将本插件用于任何非法用途。用户对其下载行为负全部责任。"
+      },
+      {
+        "id": "thirdParty",
+        "title": "5. 第三方服务",
+        "content": "本插件不依赖任何云端服务。RDAP/Whois 查询仅用于域名年龄检测，查询结果仅本地缓存，不上传任何服务器。"
+      },
+      {
+        "id": "contact",
+        "title": "6. 联系方式",
+        "content": "hxtecc@163.com | GitHub: https://github.com/hxtecc/fox-hunter"
+      },
+      {
+        "id": "changes",
+        "title": "7. 协议变更",
+        "content": "本协议可能不定期更新，最新版本以 config.json 为准。用户继续使用即视为接受更新后的条款。"
+      }
+    ]
+  },
+
+  "whitelist": {
+    "builtin": [
+      "microsoft.com", "google.com", "apple.com", "amazon.com",
+      "meta.com", "facebook.com", "instagram.com", "twitter.com",
+      "x.com", "youtube.com", "netflix.com", "spotify.com", "adobe.com",
+      "oracle.com", "ibm.com", "huawei.com", "xiaomi.com",
+      "oppo.com", "vivo.com", "samsung.com", "sony.com",
+      "qq.com", "weixin.qq.com", "bilibili.com", "dingtalk.com",
+      "feishu.cn", "bytedance.com", "douyin.com", "kuaishou.com",
+      "github.com", "gitlab.com", "sourceforge.net",
+      "stackoverflow.com", "wikipedia.org", "wikimedia.org",
+      "alibaba.com", "taobao.com", "tmall.com", "aliyun.com",
+      "baidu.com", "jd.com", "pinduoduo.com", "meituan.com",
+      "didi.com", "ctrip.com", "suning.com", "lenovo.com",
+      "zte.com.cn", "tcl.com", "haier.com", "midea.com",
+      "163.com", "126.com", "sina.com.cn", "sohu.com",
+      "ifeng.com", "people.com.cn", "xinhuanet.com",
+      "linkedin.com", "zoom.us", "slack.com", "notion.so",
+      "dropbox.com", "onedrive.com", "icloud.com",
+      "mozilla.org", "firefox.com", "chrome.com", "edge.com",
+      "tencent.com", "weibo.com", "iqiyi.com", "youku.com",
+      "tudou.com", "letv.com", "pptv.com", "mgtv.com",
+      "zhihu.com", "douban.com", "tieba.baidu.com",
+      "csdn.net", "cnblogs.com", "oschina.net", "gitee.com",
+      "ele.me", "meituan.com", "dianping.com", "flickr.com",
+      "paypal.com", "stripe.com", "alipay.com",
+      "huya.com", "douyu.com", "yy.com", "inke.cn",
+      "qunar.com", "mafengwo.cn", "ly.com", "booking.com",
+      "amazon.cn", "vip.com", "yhd.com", "dangdang.com",
+      "zhaopin.com", "51job.com", "liepin.com", "lagou.com",
+      "autohome.com.cn", "dongchedi.com", "yiche.com",
+      "360.cn", "360.com", "duba.net", "kingsoft.com",
+      "iflytek.com", "baiducontent.com", "bdstatic.com",
+      "tencentmusic.com", "y.qq.com", "music.163.com",
+      "kugou.com", "kuwo.cn", "xiami.com",
+      "nike.com", "adidas.com", "uniqlo.com", "zara.com",
+      "starbucks.com", "mcdonalds.com", "kfc.com.cn",
+      "bankofchina.com", "icbc.com.cn", "ccb.com", "abc.com.cn",
+      "cmbchina.com", "psbc.com", "bocomm.com",
+      "pingan.com", "chinapay.com", "unionpay.com",
+      "12306.cn", "china.com", "ce.cn", "gmw.cn",
+      "youth.cn", "sciencenet.cn", "cnki.net",
+      "deepl.com", "openai.com", "anthropic.com", "midjourney.com",
+      "vercel.com", "netlify.com", "heroku.com", "aws.amazon.com",
+      "cloud.google.com", "azure.microsoft.com",
+      "docker.com", "npmjs.com", "pypi.org", "maven.org",
+      "unity.com", "epicgames.com", "steampowered.com",
+      "playstation.com", "xbox.com", "nintendo.com",
+      "telegram.org", "whatsapp.com", "signal.org", "discord.com",
+      "twitch.tv", "vimeo.com", "dailymotion.com",
+      "reddit.com", "quora.com", "medium.com",
+      "pinterest.com", "tumblr.com", "flickr.com",
+      "booking.com", "airbnb.com", "expedia.com", "tripadvisor.com",
+      "cnn.com", "bbc.com", "reuters.com", "nytimes.com",
+      "washingtonpost.com", "theguardian.com", "aljazeera.com",
+      "php.net", "python.org", "nodejs.org", "java.com",
+      "go.dev", "rust-lang.org", "swift.org", "kotlinlang.org",
+      "cctv.com", "ubuntu.com", "debian.org", "fedoraproject.org",
+      "centos.org", "archlinux.org", "kernel.org",
+      "wordpress.com", "blogger.com", "tumblr.com",
+      "figma.com", "canva.com", "behance.net", "dribbble.com"
+    ],
+    "govSuffixes": [
+      "gov.cn", "gov", "gov.hk", "gov.tw", "edu.cn", "ac.cn"
+    ],
+    "downloadSites": [
+      "crsky.com", "pc6.com", "xiazaiba.com", "newhua.com",
+      "skycn.com", "onlinedown.net", "softonic.com", "down.com",
+      "zol.com.cn", "pconline.com.cn", "mydown.yesky.com",
+      "duote.com", "ddooo.com", "softpedia.com", "majorgeeks.com",
+      "filehorse.com", "pcfreetime.com", "baofeng.com",
+      "xunlei.com", "kugou.com", "kuwo.com", "weiyun.com",
+      "pan.baidu.com", "aliyundrive.com", "123pan.com",
+      "lanzou.com", "codeload.github.com", "releases.gitlab.com",
+      "down.tech.sina.com.cn", "dl.pconline.com.cn", "soft.3dmgame.com",
+      "dl.3dmgame.com", "down.ali213.net", "dl.ali213.net",
+      "down.gamersky.com", "dl.gamersky.com", "down.52pk.com",
+      "dl.52pk.com", "down.17173.com", "dl.17173.com",
+      "soft.xiaomi.com", "app.mi.com", "appstore.huawei.com"
+    ],
+    "largeSites": [
+      "bing.com", "bilibili.com", "github.com",
+      "microsoft.com", "google.com", "apple.com",
+      "amazon.com", "netflix.com", "twitter.com",
+      "youtube.com", "facebook.com", "instagram.com"
+    ]
+  },
+
+  "settings": {
+    "ball": {
+      "enabled": true,
+      "safeColor": "#10b981",
+      "warningColor": "#f59e0b",
+      "dangerColor": "#ef5350",
+      "safeThreshold": 50,
+      "dangerThreshold": 100,
+      "size": 56,
+      "opacity": 0.8
+    },
+    "popup": {
+      "enabled": true
+    },
+    "redirect": {
+      "enabled": true
+    },
+    "downloadHook": {
+      "enabled": true
+    },
+    "ssl": {
+      "enabled": true
+    },
+    "scanInterval": 3,
+    "dnsCheck": true,
+    "dnsServer": "auto",
+    "silentDuration": 3600,
+    "popupCooldown": 3600,
+    "theme": "dark",
+    "notification": true,
+    "sound": false,
+    "rules": {
+      "domainSpoof": true,
+      "archiveDownload": true,
+      "icpCheck": true,
+      "linkAnalysis": true,
+      "codeEngineering": true,
+      "downloadIntercept": true,
+      "emojiDensity": true,
+      "siteHijack": true
+    }
+  }
+}

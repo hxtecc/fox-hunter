@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>跳转警告 - 银狐猎手</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #e0e0e0;
+    }
+    .warning-container {
+      background: rgba(30, 30, 50, 0.95);
+      border: 1px solid rgba(255, 193, 7, 0.3);
+      border-radius: 16px;
+      padding: 40px;
+      max-width: 560px;
+      width: 90%;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 193, 7, 0.1);
+      text-align: center;
+    }
+    .warning-icon {
+      font-size: 64px;
+      margin-bottom: 16px;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+    .warning-title {
+      font-size: 24px;
+      font-weight: 600;
+      color: #FFC107;
+      margin-bottom: 12px;
+    }
+    .warning-target {
+      font-size: 18px;
+      color: #fff;
+      margin-bottom: 20px;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      word-break: break-all;
+    }
+    .warning-target .domain {
+      color: #FFC107;
+      font-weight: 600;
+    }
+    .warning-risk {
+      font-size: 14px;
+      color: #FFC107;
+      background: rgba(255, 193, 7, 0.1);
+      border: 1px solid rgba(255, 193, 7, 0.2);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+    .warning-info {
+      font-size: 13px;
+      color: #999;
+      margin-bottom: 24px;
+    }
+    .warning-info span {
+      color: #aaa;
+    }
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .btn {
+      padding: 14px 24px;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn:active { transform: translateY(0); }
+    .btn-back {
+      background: linear-gradient(135deg, #4CAF50, #2E7D32);
+      color: white;
+      box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+    }
+    .btn-back:hover { box-shadow: 0 6px 16px rgba(76, 175, 80, 0.4); }
+    .btn-continue {
+      background: linear-gradient(135deg, #FF9800, #E65100);
+      color: white;
+      box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
+    }
+    .btn-continue:hover { box-shadow: 0 6px 16px rgba(255, 152, 0, 0.4); }
+    .btn-block {
+      background: linear-gradient(135deg, #f44336, #b71c1c);
+      color: white;
+      box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
+    }
+    .btn-block:hover { box-shadow: 0 6px 16px rgba(244, 67, 54, 0.4); }
+    .checkbox-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 13px;
+      color: #999;
+    }
+    .checkbox-wrapper input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: #FFC107;
+    }
+    .brand {
+      margin-top: 20px;
+      font-size: 12px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="warning-container">
+    <div class="warning-icon">⚠️</div>
+    <div class="warning-title">你即将跳转到外部网站</div>
+    <div class="warning-target">
+      目标域名：<span class="domain" id="targetDomain">加载中...</span>
+    </div>
+    <div class="warning-risk">
+      ⚠️ 目标域名不在可信白名单中，可能存在安全风险。<br>
+      请确认目标网站是否可信后再继续访问。
+    </div>
+    <div class="warning-info">
+      来源：<span id="sourceDomain">-</span>
+    </div>
+    <div class="button-group">
+      <button class="btn btn-back" id="btnBack">🔙 返回原网站</button>
+      <button class="btn btn-continue" id="btnContinue">➡️ 继续前往（风险自负）</button>
+      <button class="btn btn-block" id="btnBlock">🚫 拦截并加入黑名单</button>
+    </div>
+    <div class="checkbox-wrapper">
+      <input type="checkbox" id="dontAskAgain">
+      <label for="dontAskAgain">1小时内不再提示此域名</label>
+    </div>
+    <div class="brand">🧠 银狐猎手 · 跳转安全检测</div>
+  </div>
+
+  <script src="redirect-warning.js"></script>
+</body>
+</html>

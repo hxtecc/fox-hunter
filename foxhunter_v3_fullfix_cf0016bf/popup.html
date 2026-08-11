@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 400px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      background: #0a0a0f;
+      color: #e8e8f0;
+      --bg: #0a0a0f;
+      --bg-card: #14141f;
+      --bg-input: #1a1a2a;
+      --bg-hover: #22223a;
+      --text: #e8e8f0;
+      --text-muted: #8888aa;
+      --text-dim: #55556a;
+      --border: #2a2a4a;
+      --border-light: #3a3a5a;
+      --gold: #f0c060;
+      --gold-dim: #d4a040;
+      --gold-glow: rgba(240, 192, 96, 0.15);
+      --cyan: #40d4c0;
+      --cyan-dim: #2b9b8c;
+      --danger: #ef5350;
+      --danger-bg: rgba(239, 83, 80, 0.12);
+      --success: #10b981;
+      --success-bg: rgba(16, 185, 129, 0.12);
+      --warning: #f59e0b;
+      --warning-bg: rgba(245, 158, 11, 0.12);
+      --radius: 10px;
+      --radius-sm: 6px;
+      --shadow: 0 8px 32px rgba(0,0,0,0.5);
+      --shadow-gold: 0 4px 24px rgba(240, 192, 96, 0.08);
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: linear-gradient(135deg, #14141f, #1a1a2a);
+      border-bottom: 1px solid var(--border);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .brand-icon { font-size: 22px; }
+    .brand-name {
+      font-size: 17px;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--gold), var(--cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 1px;
+    }
+    .status-badge {
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    .status-safe { background: var(--success-bg); color: var(--success); border: 1px solid rgba(16,185,129,0.4); }
+    .status-warning { background: var(--warning-bg); color: var(--warning); border: 1px solid rgba(245,158,11,0.4); }
+    .status-danger { background: var(--danger-bg); color: var(--danger); border: 1px solid rgba(239,83,80,0.4); }
+
+    /* Tab Navigation */
+    .tab-nav {
+      display: flex;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+    }
+    .tab-btn {
+      flex: 1;
+      padding: 10px 14px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      border-bottom: 2px solid transparent;
+      font-family: inherit;
+    }
+    .tab-btn:hover { color: var(--text); }
+    .tab-btn.active {
+      color: var(--gold);
+      border-bottom-color: var(--gold);
+      background: var(--bg-hover);
+    }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    .body { padding: 14px 16px; }
+
+    .domain-section {
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    .domain-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      word-break: break-all;
+      margin-bottom: 4px;
+    }
+    .icp-info {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .score-section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      padding: 14px 0;
+      margin-bottom: 12px;
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+    }
+    .score-ring {
+      position: relative;
+      width: 88px;
+      height: 88px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .score-ring svg { position: absolute; top: 0; left: 0; }
+    .score-value {
+      font-size: 30px;
+      font-weight: 800;
+      z-index: 1;
+      transition: color 0.4s ease;
+    }
+    .score-detail { text-align: left; }
+    .score-label {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      transition: color 0.4s ease;
+    }
+    .score-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .rules-section { margin-bottom: 12px; }
+    .rules-header {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .rules-list {
+      max-height: 150px;
+      overflow-y: auto;
+    }
+    .rules-list::-webkit-scrollbar { width: 3px; }
+    .rules-list::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+    .l0-pass-info {
+      text-align: center;
+      padding: 20px;
+      color: var(--success);
+      font-size: 14px;
+    }
+    .l0-pass-info .icon { font-size: 36px; margin-bottom: 8px; }
+
+    .footer {
+      display: flex;
+      gap: 8px;
+      padding: 10px 16px;
+      border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      flex: 1;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .footer-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: var(--gold-glow);
+    }
+    .footer-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Network Detection Tab */
+    .net-section {
+      margin-bottom: 14px;
+    }
+    .net-card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      margin-bottom: 10px;
+    }
+    .net-card h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .net-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 0;
+      font-size: 13px;
+    }
+    .net-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .net-dot.green { background: var(--success); box-shadow: 0 0 6px var(--success); }
+    .net-dot.red { background: var(--danger); box-shadow: 0 0 6px var(--danger); }
+    .net-dot.gray { background: var(--text-dim); }
+    .net-label { color: var(--text-muted); min-width: 80px; }
+    .net-value { color: var(--text); font-weight: 500; }
+    .net-btn {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+      margin-top: 8px;
+    }
+    .net-btn:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+      background: rgba(64, 212, 192, 0.08);
+    }
+    .net-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .net-result {
+      margin-top: 8px;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      display: none;
+    }
+    .net-result.show { display: block; }
+    .net-result.success { background: var(--success-bg); color: var(--success); border: 1px solid rgba(16,185,129,0.3); }
+    .net-result.error { background: var(--danger-bg); color: var(--danger); border: 1px solid rgba(239,83,80,0.3); }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="brand">
+      <span class="brand-icon">🦊</span>
+      <span class="brand-name">银狐猎手</span>
+    </div>
+    <span id="statusBadge" class="status-badge status-safe">检测中...</span>
+  </div>
+
+  <!-- Tab Navigation -->
+  <div class="tab-nav">
+    <button class="tab-btn active" data-tab="risk">🛡️ 风险评分</button>
+    <button class="tab-btn" data-tab="network">🌐 网络检测</button>
+  </div>
+
+  <!-- Tab: Risk Score -->
+  <div id="tabRisk" class="tab-content active">
+    <div class="body">
+      <div class="domain-section">
+        <div id="popupDomain" class="domain-name">加载中...</div>
+        <div id="popupIcp" class="icp-info">🛡️ 正在检测 ICP 备案...</div>
+      </div>
+
+      <div id="scoreArea">
+        <div class="score-section">
+          <div class="score-ring">
+            <div id="scoreRing"></div>
+            <span id="scoreValue" class="score-value">--</span>
+          </div>
+          <div class="score-detail">
+            <div id="scoreLabel" class="score-label">检测中</div>
+            <div class="score-desc">
+              风险评分<br>
+              ≥100 高危 · ≥50 可疑 · &lt;50 安全
+            </div>
+          </div>
+        </div>
+
+        <div class="rules-section">
+          <div class="rules-header">📋 命中规则</div>
+          <div id="rulesList" class="rules-list">
+            <div style="color:var(--text-muted);font-size:13px;padding:8px 0;">正在分析...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- L0 Pass Info (shown when no download/redirect links) -->
+      <div id="l0PassInfo" class="l0-pass-info" style="display:none;">
+        <div class="icon">✅</div>
+        <div style="font-weight:700;font-size:16px;margin-bottom:4px;">无下载或跳转链接</div>
+        <div style="color:var(--text-muted);font-size:13px;">当前页面未发现下载链接或跳转链接，已直接放行。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab: Network Detection -->
+  <div id="tabNetwork" class="tab-content">
+    <div class="body">
+      <div class="net-section">
+        <div class="net-card">
+          <h3>🔍 DNS 状态检测</h3>
+          <div class="net-status">
+            <span id="dnsDot" class="net-dot gray"></span>
+            <span class="net-label">DNS状态：</span>
+            <span id="dnsStatus" class="net-value">未检测</span>
+          </div>
+          <div class="net-status">
+            <span class="net-dot gray" style="visibility:hidden;"></span>
+            <span class="net-label">DNS供应商：</span>
+            <span id="dnsProvider" class="net-value">未检测</span>
+          </div>
+          <button id="dnsCheckBtn" class="net-btn">🔍 手动检测DNS</button>
+          <div id="dnsResult" class="net-result"></div>
+        </div>
+
+        <div class="net-card">
+          <h3>🌐 网络连通性</h3>
+          <div class="net-status">
+            <span id="netDot" class="net-dot gray"></span>
+            <span class="net-label">网络状态：</span>
+            <span id="netStatus" class="net-value">未检测</span>
+          </div>
+          <button id="netCheckBtn" class="net-btn">🌐 检测网络连通性</button>
+          <div id="netResult" class="net-result"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <button id="rescanBtn" class="footer-btn">🔄 重新检测</button>
+    <button id="settingsBtn" class="footer-btn">⚙️ 管理设置</button>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
